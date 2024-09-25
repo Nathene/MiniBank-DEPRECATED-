@@ -5,4 +5,10 @@ run: build
 	@./bin/gobank
 
 test:
-	@o test -v ./...
+	@go test -v ./...
+
+seed:
+	@ go run scripts/seeds/createUsers/main.go
+
+rmtable:
+	@ go run scripts/seeds/dropTable/main.go
