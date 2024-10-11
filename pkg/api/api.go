@@ -57,7 +57,7 @@ func (s *APIServer) handleLogin(w http.ResponseWriter, r *http.Request) error {
 	return fmt.Errorf("method not allowed %s", r.Method)
 }
 
-func loginGet(w http.ResponseWriter, r *http.Request) error {
+func loginGet(w http.ResponseWriter, _ *http.Request) error {
 	// Serve the Go template
 	tmpl, err := template.New("webpage").Parse(t.Tpl)
 	if err != nil {
@@ -125,7 +125,7 @@ func (s *APIServer) handleAccount(w http.ResponseWriter, r *http.Request) error 
 }
 
 // GET /account
-func (s *APIServer) handleGetAccount(w http.ResponseWriter, r *http.Request) error {
+func (s *APIServer) handleGetAccount(w http.ResponseWriter, _ *http.Request) error {
 	accounts, err := s.store.GetAccounts()
 	if err != nil {
 		return err
@@ -155,7 +155,7 @@ func (s *APIServer) handleCreateAccount(w http.ResponseWriter, r *http.Request) 
 		return err
 	}
 
-	account, err := util.NewAccount(accReq.FirstName, accReq.LastName, accReq.Email, accReq.Password)
+	account, err := util.NewAccount(accReq.FirstName, accReq.LastName, accReq.Username, accReq.Email, accReq.Password)
 	if err != nil {
 		return err
 	}
@@ -226,7 +226,7 @@ func getID(r *http.Request) (int, error) {
 }
 
 func permissionDenied(w http.ResponseWriter) {
-	writeJson(w, http.StatusBadRequest, ApiError{Error: "permission denied"})
+	_ = writeJson(w, http.StatusBadRequest, ApiError{Error: "permission denied"})
 }
 
 func withJWTAuth(handlerFunc http.HandlerFunc, s internal.Storage) http.HandlerFunc {

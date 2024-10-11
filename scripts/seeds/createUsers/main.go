@@ -22,8 +22,8 @@ func main() {
 
 }
 
-func seedAccount(store internal.Storage, fname, lname, email, pw string) *util.Account {
-	acc, err := util.NewAccount(fname, lname, email, pw)
+func seedAccount(store internal.Storage, fname, lname, user, email, pw string) *util.Account {
+	acc, err := util.NewAccount(fname, lname, user, email, pw)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,8 +38,8 @@ func seedAccount(store internal.Storage, fname, lname, email, pw string) *util.A
 }
 
 func seedAccounts(s internal.Storage) {
-	seedAccount(s, "Nathan", "gg", "nathan@email.com", "hehe")
-	seedAccount(s, "Jessie", "Bessy", "jess@email.com", "haha")
-	seedAccount(s, "Bob", "J", "bob@email.com", "hoho")
-	seedAccount(s, "Fred", "P", "fred@email.com", "huhu")
+	seedAccount(s, "Nathan", "gg", "user", "nathan@email.com", "hehe")
+	seedAccount(s, "Jessie", "Bessy", "user", "jess@email.com", "haha")
+	seedAccount(s, "Bob", "J", "user", "bob@email.com", "hoho")
+	seedAccount(s, "Fred", "P", "user", "fred@email.com", "huhu")
 }
